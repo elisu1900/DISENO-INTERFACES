@@ -1,6 +1,7 @@
 package views;
 
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 public class ClienteBorrar extends JPanel {
 
@@ -10,6 +11,9 @@ public class ClienteBorrar extends JPanel {
 	 * Create the panel.
 	 */
 	public ClienteBorrar() {
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		add(lblNewLabel);
 
 	}
 

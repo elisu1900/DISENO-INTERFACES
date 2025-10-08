@@ -27,10 +27,11 @@ public class MainView extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     Cliente panelCliente = new Cliente();
+    ClienteCrear panelClienteCrear = new ClienteCrear();
+    ClienteBorrar panelClienteBorrar = new ClienteBorrar();
     private JPanel panelCards; 
     private CardLayout cardLayout;
     
-    private JPanel panelMain;
 
     /**
      * Launch the application.
@@ -77,16 +78,26 @@ public class MainView extends JFrame {
         
         JPanel panelMain = new JPanel();
         panelMain.setBackground(Color.decode("#6FA8DC"));
+        
+        
         panelCards.add(panelMain, "main");
         panelCards.add(panelCliente, "cliente");
+        panelCards.add(panelClienteCrear, "clienteCrear");
+        panelCards.add(panelClienteBorrar, "clienteBorrar");
+        
+        panelCliente.setCardLayout(panelCards, cardLayout);
         
         // Menú lateral
         JPanel panel_menu = new JPanel(new GridLayout(4, 1, 10, 10));
         panel_menu.setBackground(Color.decode("#1C4587"));
+        panel_menu.setPreferredSize(new Dimension(200,0));
         contentPane.add(panel_menu, BorderLayout.WEST);
-        		ImageIcon icon = new ImageIcon("/Tarea2/src/images/imgCliente.jpg");
-        		Image img = icon.getImage().getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
-                JButton btnClientes = new JButton("Clientes", icon);
+        ImageIcon icono = new ImageIcon(getClass().getResource("/images/imgCliente.jpg"));
+        Image img = icono.getImage();
+        Image imgRedimensionada = img.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon iconoRedimensionado = new ImageIcon(imgRedimensionada);
+        
+                JButton btnClientes = new JButton("Clientes", iconoRedimensionado);
                 btnClientes.addActionListener(new ActionListener() {
                 	public void actionPerformed(ActionEvent e) {
                 		cardLayout.show(panelCards, "cliente");
