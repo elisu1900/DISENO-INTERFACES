@@ -17,20 +17,20 @@ import javax.swing.table.DefaultTableModel;
 import models.ClientUtil;
 
 import javax.swing.JTable;
+import java.awt.FlowLayout;
 
-public class Cliente extends JPanel {
+public class ClientView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private JTable tblProduct;
+	public static DefaultTableModel model;
 	private JPanel panelCards;
 	private CardLayout cardLayout;
-	private JTable tblCliente;
-	public static DefaultTableModel model;
-
 	
 	/**
 	 * Create the panel.
 	 */
-	public Cliente() {
+	public ClientView() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel = new JLabel("CLIENTE");
@@ -39,16 +39,14 @@ public class Cliente extends JPanel {
 		add(lblNewLabel, BorderLayout.NORTH);
 		
 		JPanel panel = new JPanel();
-		add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
+		add(panel, BorderLayout.SOUTH);
 		
 		JButton btnCrear = new JButton("CREAR");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (cardLayout != null && panelCards != null) {
-					cardLayout.show(panelCards, "clienteCrear");
-				}
+				ClientCreate dialog = new ClientCreate();
+			    dialog.setVisible(true);
 			}
 		});
 		
@@ -56,14 +54,12 @@ public class Cliente extends JPanel {
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (cardLayout != null && panelCards != null) {
-					cardLayout.show(panelCards, "clienteBorrar");
-				}
+				ClientDelete dialog = new ClientDelete();
+				dialog.setVisible(getFocusTraversalKeysEnabled());
 			}
 		});
-		btnBorrar.setBounds(281, 211, 115, 43);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		panel.add(btnBorrar);
-		btnCrear.setBounds(54, 211, 115, 43);
 		panel.add(btnCrear);
 		
 		String[] columnNames = {"Nombre", "Apellido", "email", "edad", "provincia"};
@@ -74,13 +70,11 @@ public class Cliente extends JPanel {
 		};
 		
 		
-		tblCliente = new JTable(model);
-		tblCliente.setBounds(54, 41, 342, 0);
-		tblCliente.setRowHeight(25);
-		panel.add(tblCliente);
-		ClientUtil.mostrarclientes(ClientUtil.listClients);
+		tblProduct = new JTable(model);
+		tblProduct.setRowHeight(25);
+		ClientUtil.showClients(ClientUtil.listClients);
 		
-		JScrollPane scrollPane = new JScrollPane(tblCliente);
+		JScrollPane scrollPane = new JScrollPane(tblProduct);
 		add(scrollPane, BorderLayout.CENTER);
 		
 	}

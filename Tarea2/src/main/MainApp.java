@@ -15,19 +15,19 @@ public class MainApp {
 	
 	public static void main(String[] args) {
 
-		Client cliente = new Client("aaa", "eee", "iii", 12, "aaa");
+		Client cliente = new Client("aaa", "eee", "111", 12, "aaa");
 		ClientUtil.listClients.add(cliente);
-		Client cliente1 = new Client("aaa", "eee", "iii", 20, "aaa");
+		Client cliente1 = new Client("aaa", "eee", "222", 20, "aaa");
 		ClientUtil.listClients.add(cliente1);
-		Client cliente2 = new Client("aaa", "eee", "iii", 18, "aaa");
+		Client cliente2 = new Client("aaa", "eee", "333", 18, "aaa");
 		ClientUtil.listClients.add(cliente2);
-		Client cliente3 = new Client("aaa", "eee", "iii", 17, "aaa");
+		Client cliente3 = new Client("aaa", "eee", "444", 17, "aaa");
 		ClientUtil.listClients.add(cliente3);
-		Client cliente4 = new Client("aaa", "eee", "iii", 16, "aaa");
+		Client cliente4 = new Client("aaa", "eee", "555", 16, "aaa");
 		ClientUtil.listClients.add(cliente4);
-		Client cliente5 = new Client("aaa", "eee", "iii", 15, "aaa");
+		Client cliente5 = new Client("aaa", "eee", "666", 15, "aaa");
 		ClientUtil.listClients.add(cliente5);
-		Client cliente6 = new Client("aaa", "eee", "iii", 13, "aaa");
+		Client cliente6 = new Client("aaa", "eee", "777", 13, "aaa");
 		ClientUtil.listClients.add(cliente6);
 		
 		

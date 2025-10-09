@@ -26,9 +26,9 @@ public class MainView extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    Cliente panelCliente = new Cliente();
-    ClienteCrear panelClienteCrear = new ClienteCrear();
-    ClienteBorrar panelClienteBorrar = new ClienteBorrar();
+    ClientView panelCliente = new ClientView();
+    ProductView panelProducto = new ProductView();
+
     private JPanel panelCards; 
     private CardLayout cardLayout;
     
@@ -82,8 +82,7 @@ public class MainView extends JFrame {
         
         panelCards.add(panelMain, "main");
         panelCards.add(panelCliente, "cliente");
-        panelCards.add(panelClienteCrear, "clienteCrear");
-        panelCards.add(panelClienteBorrar, "clienteBorrar");
+        panelCards.add(panelProducto, "producto");
         
         panelCliente.setCardLayout(panelCards, cardLayout);
         
@@ -92,7 +91,8 @@ public class MainView extends JFrame {
         panel_menu.setBackground(Color.decode("#1C4587"));
         panel_menu.setPreferredSize(new Dimension(200,0));
         contentPane.add(panel_menu, BorderLayout.WEST);
-        ImageIcon icono = new ImageIcon(getClass().getResource("/images/imgCliente.jpg"));
+        
+        ImageIcon icono = new ImageIcon(getClass().getResource("/images/imgClient.jpg"));
         Image img = icono.getImage();
         Image imgRedimensionada = img.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
         ImageIcon iconoRedimensionado = new ImageIcon(imgRedimensionada);
@@ -105,7 +105,18 @@ public class MainView extends JFrame {
                 });
                 panel_menu.add(btnClientes);
         
-        JButton btnProductos = new JButton("Productos");
+                
+        ImageIcon icono2 = new ImageIcon(getClass().getResource("/images/imgProduct.jpg"));
+        Image img2 = icono2.getImage();
+        Image imgRedimensionada2 = img2.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon iconoRedimensionado2 = new ImageIcon(imgRedimensionada2);
+                
+        JButton btnProductos = new JButton("Productos", iconoRedimensionado2);
+        btnProductos.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		cardLayout.show(panelCards, "producto");
+        	}
+        });
         panel_menu.add(btnProductos);
 
         JButton btnFacturas = new JButton("Facturas");
