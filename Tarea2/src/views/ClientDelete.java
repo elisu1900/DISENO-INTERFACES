@@ -21,7 +21,7 @@ public class ClientDelete extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private ClientView panelPadre;
+	private ClientView parentPanel;
 
 	public static JTextField txtEmailD;
 
@@ -39,7 +39,7 @@ public class ClientDelete extends JDialog {
 	}
 
 	public ClientDelete(ClientView padre) {
-		this.panelPadre = padre;
+		this.parentPanel = padre;
 	}
 
 	/**
@@ -60,8 +60,8 @@ public class ClientDelete extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						ClientUtil.delete();
 
-						if (panelPadre != null) {
-							ClientUtil.showClients(ClientUtil.listClients);
+						if (parentPanel != null) {
+							ClientUtil.showClients();
 						}
 
 						dispose();
@@ -82,9 +82,9 @@ public class ClientDelete extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		JLabel lblNombre = new JLabel("EMAIL:");
-		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(lblNombre);
+		JLabel lblEmail = new JLabel("EMAIL:");
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPanel.add(lblEmail);
 		txtEmailD = new JTextField();
 		contentPanel.add(txtEmailD);
 

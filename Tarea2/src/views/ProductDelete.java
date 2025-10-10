@@ -21,8 +21,9 @@ public class ProductDelete extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private ProductView panelPadre;
-	public static JTextField txtNombre;
+	private ProductView parentPanel;
+	public static JTextField txtName;
+
 	/**
 	 * Launch the application.
 	 */
@@ -54,8 +55,8 @@ public class ProductDelete extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						ProductUtil.delete();
 
-						if (panelPadre != null) {
-							ProductUtil.showProducts(ProductUtil.listProducts);
+						if (parentPanel != null) {
+							ProductUtil.showProducts();
 						}
 
 						dispose();
@@ -76,11 +77,11 @@ public class ProductDelete extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(lblNombre);
-		txtNombre = new JTextField();
-		contentPanel.add(txtNombre);
+		JLabel lblName = new JLabel("Nombre:");
+		lblName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPanel.add(lblName);
+		txtName = new JTextField();
+		contentPanel.add(txtName);
 
 	}
 

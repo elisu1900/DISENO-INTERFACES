@@ -23,13 +23,13 @@ public class ProductCreate extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	public static JTextField txtNombre;
-	public static JTextField txtPrecio;
-	public static JTextField txtPerecedero;
-	public static JComboBox cbPerecedero;
-	private ProductView panelPadre;
+	public static JTextField txtName;
+	public static JTextField txtPrice;
+	public static JComboBox cbPerishable;
+	private ProductView parentPanel;
 
-	String[] perecedero = { "NO","SI"};
+	String[] perecedero = { "NO", "SI" };
+
 	/**
 	 * Launch the application.
 	 */
@@ -42,17 +42,18 @@ public class ProductCreate extends JDialog {
 			e.printStackTrace();
 		}
 	}
-	
-	public ProductCreate(ProductView padre) {
-		this.panelPadre = padre;
+
+	public ProductCreate(ProductView parent) {
+		this.parentPanel = parent;
 	}
+
 	/**
 	 * Create the dialog.
 	 */
 	public ProductCreate() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
-		
+
 		contentPanel.setLayout(new GridLayout(3, 2, 10, 10));
 		contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -65,11 +66,11 @@ public class ProductCreate extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						ProductUtil.create();
-						
-						if (panelPadre != null) {
-							ProductUtil.showProducts(ProductUtil.listProducts);
+
+						if (parentPanel != null) {
+							ProductUtil.showProducts();
 						}
-						
+
 						dispose();
 					}
 				});
@@ -89,27 +90,23 @@ public class ProductCreate extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		JLabel lblNombre = new JLabel("NOMBRE:");
-		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(lblNombre);
-		txtNombre = new JTextField();
-		contentPanel.add(txtNombre);
+		JLabel lblName = new JLabel("NOMBRE:");
+		lblName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPanel.add(lblName);
+		txtName = new JTextField();
+		contentPanel.add(txtName);
 
-		
-		JLabel lblApellido = new JLabel("APELLIDO:");
-		lblApellido.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(lblApellido);
-		txtPrecio = new JTextField();
-		contentPanel.add(txtPrecio);
+		JLabel lblLastName = new JLabel("APELLIDO:");
+		lblLastName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPanel.add(lblLastName);
+		txtPrice = new JTextField();
+		contentPanel.add(txtPrice);
 
-		
-		JLabel lblPerecedero = new JLabel("PERECEDERO:");
-		lblPerecedero.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPanel.add(lblPerecedero);
-		cbPerecedero = new JComboBox<String>(perecedero);
-		contentPanel.add(cbPerecedero);
+		JLabel lblPerishable = new JLabel("PERECEDERO:");
+		lblPerishable.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		contentPanel.add(lblPerishable);
+		cbPerishable = new JComboBox<String>(perecedero);
+		contentPanel.add(cbPerishable);
 	}
-	
-	
 
 }

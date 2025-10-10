@@ -13,66 +13,71 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 import models.ClientUtil;
+import models.ProductUtil;
 
 public class ProductView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTable tblProduct;
 	public static DefaultTableModel model;
+
 	/**
 	 * Create the panel.
 	 */
 	public ProductView() {
 
 		setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNewLabel = new JLabel("PRODUCTO");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		add(lblNewLabel, BorderLayout.NORTH);
-		
+
+		JLabel lblTitle = new JLabel("PRODUCTO");
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		add(lblTitle, BorderLayout.NORTH);
+
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.SOUTH);
-		
-		JButton btnCrear = new JButton("CREAR");
-		btnCrear.addActionListener(new ActionListener() {
+
+		JButton btnCreate = new JButton("CREAR");
+		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				ProductCreate dialog = new ProductCreate();
-			    dialog.setVisible(true);
+				dialog.setVisible(true);
 			}
 		});
-		
-		JButton btnBorrar = new JButton("BORRAR");
-		btnBorrar.addActionListener(new ActionListener() {
+
+		JButton btnDelete = new JButton("BORRAR");
+		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				ProductDelete dialog = new ProductDelete();
 				dialog.setVisible(getFocusTraversalKeysEnabled());
 			}
 		});
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		panel.add(btnBorrar);
-		panel.add(btnCrear);
-		
-		String[] columnNames = {"Nombre", "precio", "perecedero"};
+		panel.add(btnDelete);
+		panel.add(btnCreate);
+
+		String[] columnNames = { "Nombre", "precio", "perecedero" };
 		model = new DefaultTableModel(columnNames, 0) {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		
-		
+
 		tblProduct = new JTable(model);
 		tblProduct.setRowHeight(25);
-		ClientUtil.showClients(ClientUtil.listClients);
 		
+		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+		tblProduct.setRowSorter(sorter);
+		
+		ProductUtil.showProducts();
+
 		JScrollPane scrollPane = new JScrollPane(tblProduct);
 		add(scrollPane, BorderLayout.CENTER);
-		
-	
+
 	}
 
 }

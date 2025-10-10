@@ -26,8 +26,8 @@ public class MainView extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    ClientView panelCliente = new ClientView();
-    ProductView panelProducto = new ProductView();
+    ClientView panelClient = new ClientView();
+    ProductView panelProduct = new ProductView();
 
     private JPanel panelCards; 
     private CardLayout cardLayout;
@@ -70,10 +70,18 @@ public class MainView extends JFrame {
         panel_header.setBackground(Color.decode("#0A3D91")); 
         contentPane.add(panel_header, BorderLayout.NORTH);
         
+        ImageIcon iconHeader = new ImageIcon(getClass().getResource("/images/imgHeader.png"));
+        Image imgHeader = iconHeader.getImage();
+        Image imgresizedHeader = imgHeader.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon iconresizedHeader = new ImageIcon(imgresizedHeader);
+
+        JLabel lblImgHeader = new JLabel(iconresizedHeader);
         JLabel header = new JLabel("I.E.S.Pablo Picasso");
+        
         header.setForeground(Color.WHITE);
         header.setHorizontalAlignment(SwingConstants.CENTER);
-        header.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        header.setFont(new Font("Tahoma", Font.PLAIN, 19));
+        panel_header.add(lblImgHeader);
         panel_header.add(header);
         
         JPanel panelMain = new JPanel();
@@ -81,60 +89,60 @@ public class MainView extends JFrame {
         
         
         panelCards.add(panelMain, "main");
-        panelCards.add(panelCliente, "cliente");
-        panelCards.add(panelProducto, "producto");
+        panelCards.add(panelClient, "cliente");
+        panelCards.add(panelProduct, "producto");
         
-        panelCliente.setCardLayout(panelCards, cardLayout);
+        panelClient.setCardLayout(panelCards, cardLayout);
         
         // Menú lateral
-        JPanel panel_menu = new JPanel(new GridLayout(4, 1, 10, 10));
-        panel_menu.setBackground(Color.decode("#1C4587"));
-        panel_menu.setPreferredSize(new Dimension(200,0));
-        contentPane.add(panel_menu, BorderLayout.WEST);
+        JPanel panelMenu = new JPanel(new GridLayout(4, 1, 10, 10));
+        panelMenu.setBackground(Color.decode("#1C4587"));
+        panelMenu.setPreferredSize(new Dimension(200,0));
+        contentPane.add(panelMenu, BorderLayout.WEST);
         
-        ImageIcon icono = new ImageIcon(getClass().getResource("/images/imgClient.jpg"));
-        Image img = icono.getImage();
-        Image imgRedimensionada = img.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        ImageIcon iconoRedimensionado = new ImageIcon(imgRedimensionada);
+        ImageIcon icon = new ImageIcon(getClass().getResource("/images/imgClient.jpg"));
+        Image img = icon.getImage();
+        Image imgresized = img.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon iconresized = new ImageIcon(imgresized);
         
-                JButton btnClientes = new JButton("Clientes", iconoRedimensionado);
-                btnClientes.addActionListener(new ActionListener() {
+                JButton btnClient = new JButton("Clientes", iconresized);
+                btnClient.addActionListener(new ActionListener() {
                 	public void actionPerformed(ActionEvent e) {
                 		cardLayout.show(panelCards, "cliente");
                 	}
                 });
-                panel_menu.add(btnClientes);
+                panelMenu.add(btnClient);
         
                 
-        ImageIcon icono2 = new ImageIcon(getClass().getResource("/images/imgProduct.jpg"));
-        Image img2 = icono2.getImage();
-        Image imgRedimensionada2 = img2.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        ImageIcon iconoRedimensionado2 = new ImageIcon(imgRedimensionada2);
+        ImageIcon icon2 = new ImageIcon(getClass().getResource("/images/imgProduct.jpg"));
+        Image img2 = icon2.getImage();
+        Image imgresized2 = img2.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon iconresized2 = new ImageIcon(imgresized2);
                 
-        JButton btnProductos = new JButton("Productos", iconoRedimensionado2);
-        btnProductos.addActionListener(new ActionListener() {
+        JButton btnProducts = new JButton("Productos", iconresized2);
+        btnProducts.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		cardLayout.show(panelCards, "producto");
         	}
         });
-        panel_menu.add(btnProductos);
+        panelMenu.add(btnProducts);
 
-        JButton btnFacturas = new JButton("Facturas");
-        panel_menu.add(btnFacturas);
+        JButton btnBill = new JButton("Facturas");
+        panelMenu.add(btnBill);
         
-        JButton btnUsuario = new JButton("Usuarios");
-        panel_menu.add(btnUsuario);
+        JButton btnUser = new JButton("Usuarios");
+        panelMenu.add(btnUser);
         
 
         
         // Footer
-        JPanel panel_footer = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel_footer.setBackground(Color.LIGHT_GRAY);
-        contentPane.add(panel_footer, BorderLayout.SOUTH);
+        JPanel panelFooter = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelFooter.setBackground(Color.LIGHT_GRAY);
+        contentPane.add(panelFooter, BorderLayout.SOUTH);
         
         JLabel footer = new JLabel("Elias Wassit Calzado");
         footer.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        panel_footer.add(footer);
+        panelFooter.add(footer);
         
     }
 }

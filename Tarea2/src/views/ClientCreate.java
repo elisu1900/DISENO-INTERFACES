@@ -30,12 +30,12 @@ public class ClientCreate extends JDialog {
 			"La Rioja", "Las Palmas", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Orense",
 			"Palencia", "Pontevedra", "Salamanca", "Santa Cruz de Tenerife", "Segovia", "Sevilla", "Soria", "Tarragona",
 			"Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza", "Ceuta", "Melilla" };
-	public static JComboBox cbProvincia;
-	public static JTextField txtApellido;
-	public static JTextField txtNombre;
+	public static JComboBox cbProvince;
+	public static JTextField txtLastName;
+	public static JTextField txtName;
 	public static JTextField txtEmail;
-	public static JTextField txtEdad;
-	private ClientView panelPadre;
+	public static JTextField txtAge;
+	private ClientView parentPanel;
 
 	/**
 	 * Launch the application.
@@ -51,9 +51,9 @@ public class ClientCreate extends JDialog {
 	}
 
 	public ClientCreate(ClientView padre) {
-		this.panelPadre = padre;
+		this.parentPanel = padre;
 	}
-	    
+
 	/**
 	 * Create the dialog.
 	 */
@@ -66,18 +66,18 @@ public class ClientCreate extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 
 		// NOMBRE
-		JLabel lblNombre = new JLabel("NOMBRE:");
-		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(lblNombre);
-		txtNombre = new JTextField();
-		contentPanel.add(txtNombre);
+		JLabel lblName = new JLabel("NOMBRE:");
+		lblName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPanel.add(lblName);
+		txtName = new JTextField();
+		contentPanel.add(txtName);
 
 		// APELLIDO
-		JLabel lblApellido = new JLabel("APELLIDO:");
-		lblApellido.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(lblApellido);
-		txtApellido = new JTextField();
-		contentPanel.add(txtApellido);
+		JLabel lblLastName = new JLabel("APELLIDO:");
+		lblLastName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPanel.add(lblLastName);
+		txtLastName = new JTextField();
+		contentPanel.add(txtLastName);
 
 		// EMAIL
 		JLabel lblEmail = new JLabel("EMAIL:");
@@ -86,17 +86,17 @@ public class ClientCreate extends JDialog {
 		txtEmail = new JTextField();
 		contentPanel.add(txtEmail);
 		// EMAIL
-		JLabel lblEdad = new JLabel("EDAD:");
-		lblEdad.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPanel.add(lblEdad);
-		txtEdad = new JTextField();
-		contentPanel.add(txtEdad);
+		JLabel lblAge = new JLabel("EDAD:");
+		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPanel.add(lblAge);
+		txtAge = new JTextField();
+		contentPanel.add(txtAge);
 		// PROVINCIA
-		JLabel lblProvincia = new JLabel("PROVINCIA:");
-		lblProvincia.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPanel.add(lblProvincia);
-		cbProvincia = new JComboBox<String>(provincias);
-		contentPanel.add(cbProvincia);
+		JLabel lblProvince = new JLabel("PROVINCIA:");
+		lblProvince.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		contentPanel.add(lblProvince);
+		cbProvince = new JComboBox<String>(provincias);
+		contentPanel.add(cbProvince);
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -106,11 +106,11 @@ public class ClientCreate extends JDialog {
 			okButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					ClientUtil.create();
-					
-					if (panelPadre != null) {
-						ClientUtil.showClients(ClientUtil.listClients);
+
+					if (parentPanel != null) {
+						ClientUtil.showClients();
 					}
-					
+
 					dispose();
 				}
 			});

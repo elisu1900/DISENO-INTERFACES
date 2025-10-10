@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import views.ClientCreate;
-import views.ClientView;
+
 import views.ProductCreate;
 import views.ProductDelete;
 import views.ProductView;
@@ -14,39 +13,49 @@ public class ProductUtil {
 
 	public static ArrayList<Product> listProducts = new ArrayList<>();
 
-	public static void showProducts(java.util.List<Product> listProduct) {
+	/**
+	 * loads each product’s data into the table
+	 * 
+	 * @param listProduct
+	 */
+	public static void showProducts() {
 		ProductView.model.setRowCount(0);
-		for (Product product : listProduct) {
+		for (Product product : listProducts) {
 			Object[] fila = { product.getNombre(), product.getPrecio(), product.isPerecedero() };
-			ClientView.model.addRow(fila);
+			ProductView.model.addRow(fila);
 		}
 	}
 
+	/**
+	 * creates the new products to be added
+	 */
 	public static void create() {
 		try {
-			Boolean perecedero = (String) ClientCreate.cbProvincia.getSelectedItem() == "SI" ? true : false;
-			Product nuevo = new Product(ProductCreate.txtNombre.getText(), Double.parseDouble(ProductCreate.txtPrecio.getText()), perecedero);
+			Boolean perecedero = (String) ProductCreate.cbPerishable.getSelectedItem() == "SI" ? true : false;
+			Product nuevo = new Product(ProductCreate.txtName.getText(),
+					Double.parseDouble(ProductCreate.txtPrice.getText()), perecedero);
 			listProducts.add(nuevo);
-			showProducts(listProducts);
-		} catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "No se pudo crear el cliente", "Error al crear",
+			showProducts();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No se pudo crear el producto", "Error al crear",
 					JOptionPane.ERROR_MESSAGE);
 		}
-		
 
 	}
 
+	/**
+	 * delete a product identify by name
+	 */
 	public static void delete() {
-		String nombre = ProductDelete.txtNombre.getText();
+		String nombre = ProductDelete.txtName.getText();
 		if (listProducts.removeIf(product -> nombre.equals(product.getNombre()))) {
-			showProducts(listProducts);
+			showProducts();
 
 		} else {
-			JOptionPane.showMessageDialog(null, "No se pudo borrar el cliente", "Error al borrar",
+			JOptionPane.showMessageDialog(null, "No se pudo borrar el producto", "Error al borrar",
 					JOptionPane.ERROR_MESSAGE);
 		}
-			
-		
+
 	}
 
 }

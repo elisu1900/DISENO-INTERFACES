@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 import models.ClientUtil;
 
@@ -26,59 +27,63 @@ public class ClientView extends JPanel {
 	public static DefaultTableModel model;
 	private JPanel panelCards;
 	private CardLayout cardLayout;
-	
+
 	/**
 	 * Create the panel.
 	 */
 	public ClientView() {
 		setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNewLabel = new JLabel("CLIENTE");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		add(lblNewLabel, BorderLayout.NORTH);
-		
+
+		JLabel lblTitle = new JLabel("CLIENTE");
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		add(lblTitle, BorderLayout.NORTH);
+
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.SOUTH);
-		
-		JButton btnCrear = new JButton("CREAR");
-		btnCrear.addActionListener(new ActionListener() {
+
+		JButton btnCreate = new JButton("CREAR");
+		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				ClientCreate dialog = new ClientCreate();
-			    dialog.setVisible(true);
+				dialog.setVisible(true);
 			}
 		});
-		
-		JButton btnBorrar = new JButton("BORRAR");
-		btnBorrar.addActionListener(new ActionListener() {
+
+		JButton btnDelete = new JButton("BORRAR");
+		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				ClientDelete dialog = new ClientDelete();
 				dialog.setVisible(getFocusTraversalKeysEnabled());
 			}
 		});
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		panel.add(btnBorrar);
-		panel.add(btnCrear);
-		
-		String[] columnNames = {"Nombre", "Apellido", "email", "edad", "provincia"};
+		panel.add(btnDelete);
+		panel.add(btnCreate);
+
+		// Definir columnas y modelo
+		String[] columnNames = { "Nombre", "Apellido", "email", "edad", "provincia" };
 		model = new DefaultTableModel(columnNames, 0) {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		
-		
+
+		// Crear JTable y aplicar sorter
 		tblProduct = new JTable(model);
 		tblProduct.setRowHeight(25);
-		ClientUtil.showClients(ClientUtil.listClients);
-		
+
+		// ✅ Activar ordenación por columnas con flechitas
+		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+		tblProduct.setRowSorter(sorter);
+
+		// Cargar datos
+		ClientUtil.showClients();
+
 		JScrollPane scrollPane = new JScrollPane(tblProduct);
 		add(scrollPane, BorderLayout.CENTER);
-		
 	}
-	
+
 	public void setCardLayout(JPanel panelCards, CardLayout cardLayout) {
 		this.panelCards = panelCards;
 		this.cardLayout = cardLayout;
