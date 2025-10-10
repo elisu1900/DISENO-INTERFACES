@@ -5,6 +5,7 @@ import javax.swing.JScrollPane;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -41,6 +42,7 @@ public class ClientView extends JPanel {
 
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.SOUTH);
+		panel.setBackground(Color.decode("#FFE5E5")); 
 
 		JButton btnCreate = new JButton("CREAR");
 		btnCreate.addActionListener(new ActionListener() {
@@ -61,7 +63,6 @@ public class ClientView extends JPanel {
 		panel.add(btnDelete);
 		panel.add(btnCreate);
 
-		// Definir columnas y modelo
 		String[] columnNames = { "Nombre", "Apellido", "email", "edad", "provincia" };
 		model = new DefaultTableModel(columnNames, 0) {
 			public boolean isCellEditable(int row, int column) {
@@ -69,15 +70,16 @@ public class ClientView extends JPanel {
 			}
 		};
 
-		// Crear JTable y aplicar sorter
+		
 		tblProduct = new JTable(model);
 		tblProduct.setRowHeight(25);
-
-		// ✅ Activar ordenación por columnas con flechitas
+		tblProduct.getTableHeader().setBackground(Color.decode("#D4B5E8")); 
+		tblProduct.getTableHeader().setForeground(Color.WHITE);
+		
 		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
 		tblProduct.setRowSorter(sorter);
 
-		// Cargar datos
+		
 		ClientUtil.showClients();
 
 		JScrollPane scrollPane = new JScrollPane(tblProduct);

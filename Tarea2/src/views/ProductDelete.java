@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -45,6 +46,8 @@ public class ProductDelete extends JDialog {
 		contentPanel.setLayout(new GridLayout(5, 2, 10, 10));
 		contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setBackground(Color.decode("#FFE5E5"));
+
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

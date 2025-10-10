@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -59,6 +60,7 @@ public class ProductView extends JPanel {
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		panel.add(btnDelete);
 		panel.add(btnCreate);
+		panel.setBackground(Color.decode("#FFE5E5")); // Rosa pastel claro
 
 		String[] columnNames = { "Nombre", "precio", "perecedero" };
 		model = new DefaultTableModel(columnNames, 0) {
@@ -69,7 +71,8 @@ public class ProductView extends JPanel {
 
 		tblProduct = new JTable(model);
 		tblProduct.setRowHeight(25);
-		
+		tblProduct.getTableHeader().setBackground(Color.decode("#D4B5E8")); 
+		tblProduct.getTableHeader().setForeground(Color.WHITE);
 		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
 		tblProduct.setRowSorter(sorter);
 		

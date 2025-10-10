@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagLayout;
@@ -64,6 +65,8 @@ public class ClientCreate extends JDialog {
 		contentPanel.setLayout(new GridLayout(5, 2, 10, 10));
 		contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+
+		contentPanel.setBackground(Color.decode("#FFE5E5")); // Rosa pastel claro
 
 		// NOMBRE
 		JLabel lblName = new JLabel("NOMBRE:");
