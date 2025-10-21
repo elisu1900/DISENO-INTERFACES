@@ -8,6 +8,7 @@ import views.ClientView;
 import views.ClientDelete;
 import views.ClientCreate;
 
+
 public class ClientUtil {
 
 	public static ArrayList<Client> listClients = new ArrayList<>();
@@ -20,7 +21,7 @@ public class ClientUtil {
 		ClientView.model.setRowCount(0);
 		for (Client client : listClients) {
 			Object[] fila = { client.getNombre(), client.getApellidos(), client.getEmail(), client.getEdad(),
-					client.getProvincia() };
+					client.getProvincia()};
 			ClientView.model.addRow(fila);
 		}
 	}

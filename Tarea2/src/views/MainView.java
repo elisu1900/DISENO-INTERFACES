@@ -33,22 +33,6 @@ public class MainView extends JFrame {
 	private CardLayout cardLayout;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainView frame = new MainView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public MainView() {
@@ -65,7 +49,7 @@ public class MainView extends JFrame {
 
 		// Header
 		JPanel panel_header = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		panel_header.setBackground(Color.decode("#B4A7D6")); // Lavanda pastel
+		panel_header.setBackground(Color.decode("#B4A7D6")); 
 		contentPane.add(panel_header, BorderLayout.NORTH);
 
 		ImageIcon iconHeader = new ImageIcon(getClass().getResource("/images/imgHeader.png"));
@@ -83,8 +67,7 @@ public class MainView extends JFrame {
 		panel_header.add(header);
 
 		JPanel panelMain = new JPanel();
-		panelMain.setBackground(Color.decode("#FFE5E5")); // Rosa pastel claro
-
+		panelMain.setBackground(Color.decode("#FFE5E5")); 
 		panelCards.add(panelMain, "main");
 		panelCards.add(panelClient, "cliente");
 		panelCards.add(panelProduct, "producto");
@@ -93,14 +76,14 @@ public class MainView extends JFrame {
 
 		// Menú lateral
 		JPanel panelMenu = new JPanel(new GridLayout(4, 1, 10, 10));
-		panelMenu.setBackground(Color.decode("#D4B5E8")); // Lila pastel
+		panelMenu.setBackground(Color.decode("#D4B5E8")); 
 		panelMenu.setPreferredSize(new Dimension(200, 0));
 		contentPane.add(panelMenu, BorderLayout.WEST);
 
 		
 
 		JButton btnClient = new JButton(" 👤 Clientes");
-		btnClient.setBackground(new Color(255, 209, 220)); // Rosa chicle pastel
+		btnClient.setBackground(new Color(255, 209, 220)); 
 		btnClient.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 24));
 
 		btnClient.addActionListener(new ActionListener() {
@@ -114,7 +97,7 @@ public class MainView extends JFrame {
 
 		JButton btnProducts = new JButton(" 📦 Productos");
 		btnProducts.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 24));
-		btnProducts.setBackground(new Color(181, 234, 215)); // Menta pastel
+		btnProducts.setBackground(new Color(181, 234, 215)); 
 		
 		btnProducts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -126,7 +109,7 @@ public class MainView extends JFrame {
 		JButton btnBill = new JButton(" 💰 Facturas");
 		btnBill.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 24));
 
-		btnBill.setBackground(new Color(255, 203, 164)); // Melocotón pastel
+		btnBill.setBackground(new Color(255, 203, 164)); 
 		panelMenu.add(btnBill);
 
 		JButton btnUser = new JButton(" 🛠️ Usuarios");

@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.EventQueue;
+
 import models.Client;
 import models.ClientUtil;
 import models.Product;
@@ -34,8 +36,16 @@ public class MainApp {
 		ProductUtil.listProducts.add(new Product("Harina", 2.10, false));
 		ProductUtil.listProducts.add(new Product("Chocolate", 3.75, false));
 
-		MainView ventana = new MainView();
-		ventana.setVisible(true);
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MainView frame = new MainView();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 }
