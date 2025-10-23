@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.GridBagLayout;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
@@ -22,6 +23,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class MainView extends JFrame {
 
@@ -125,7 +127,8 @@ public class MainView extends JFrame {
 		lblCreacionCuenta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				CrearCuentas crearCuentas = new CrearCuentas();
+				crearCuentas.setVisible(getFocusTraversalKeysEnabled());
 			}
 		});
 		
@@ -138,5 +141,52 @@ public class MainView extends JFrame {
 		
 		JPanel welcomePanel = new JPanel();
 		panelCards.add(welcomePanel, "name_182186007900");
+		welcomePanel.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panelBoton = new JPanel();
+		panelBoton.setBackground(new Color(152, 251, 152));
+		welcomePanel.add(panelBoton, BorderLayout.WEST);
+		panelBoton.setLayout(new GridLayout(4, 0, 0, 0));
+		
+		JButton btnAddMed = new JButton("Añadir Medicamento\r\n");
+		btnAddMed.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnAddMed.setForeground(new Color(255, 255, 255));
+		btnAddMed.setBackground(new Color(46, 139, 87));
+		panelBoton.add(btnAddMed);
+		
+		JButton btnAddTrat = new JButton("Añadir tratamiento\r\n");
+		btnAddTrat.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnAddTrat.setForeground(new Color(255, 255, 255));
+		btnAddTrat.setBackground(new Color(46, 139, 87));
+		panelBoton.add(btnAddTrat);
+		
+		JButton btnMiSalud = new JButton("Mi Salud\r\n");
+		btnMiSalud.setForeground(new Color(255, 255, 255));
+		btnMiSalud.setBackground(new Color(46, 139, 87));
+		panelBoton.add(btnMiSalud);
+		
+		JButton btnCerrar = new JButton("Cerrar Sesion");
+		btnCerrar.setForeground(new Color(255, 255, 255));
+		btnCerrar.setBackground(new Color(46, 139, 87));
+		panelBoton.add(btnCerrar);
+		
+		JPanel panelContent = new JPanel();
+		panelContent.setBackground(new Color(152, 251, 152));
+		welcomePanel.add(panelContent, BorderLayout.CENTER);
+		panelContent.setLayout(new BorderLayout(0, 0));
+		
+		JLabel img = new JLabel("\r\n");
+		img.setHorizontalAlignment(SwingConstants.CENTER);
+		img.setBackground(new Color(152, 251, 152));
+		ImageIcon originalIcon = new ImageIcon("C:\\Users\\Elias\\Desktop\\DAM\\DESARROLLO-INTERFACES\\Tarea_Medicoo\\sources\\imgPrincipal.jpg");
+		Image scaledImage = originalIcon.getImage().getScaledInstance(350, 250, Image.SCALE_SMOOTH);
+		img.setIcon(new ImageIcon(scaledImage));
+		panelContent.add(img, BorderLayout.CENTER);
+		
+		JLabel lblWelcome = new JLabel("BIENVENIDO/A A ISALUD, LA APP PARA GESTIONAR TU BIENESTAR");
+		lblWelcome.setBackground(new Color(152, 251, 152));
+		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panelContent.add(lblWelcome, BorderLayout.NORTH);
 	}
 }
