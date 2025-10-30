@@ -4,41 +4,57 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
+
+import controller.UsuarioController;
+import model.Usuario;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.GridBagLayout;
-import java.awt.CardLayout;
-import java.awt.FlowLayout;
 import javax.swing.JTextField;
+import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
 
 public class MainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JPasswordField txtPassword;
+	private JTextField txtEmail;
+	
+	// El controlador que maneja los usuarios
+	private UsuarioController controlador;
 
-	private JPanel panelCards;
-	private CardLayout cardLayout;
-	private JTextField textField;
-	private JTextField textField_1;
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MainView frame = new MainView();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
-	/**
-	 * Create the frame.
-	 */
 	public MainView() {
+		controlador = new UsuarioController();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 668, 400);
 		contentPane = new JPanel();
@@ -46,31 +62,29 @@ public class MainView extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		
 		JPanel headerPanel = new JPanel();
 		headerPanel.setBackground(new Color(60, 179, 113));
 		contentPane.add(headerPanel, BorderLayout.NORTH);
-		
-		cardLayout = new CardLayout();
-		panelCards = new JPanel(cardLayout);
-		contentPane.add(panelCards, BorderLayout.CENTER);
-
-		
 
 		JLabel lblNewLabel = new JLabel("iSalud\r\n");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Elias\\workspace1\\Tarea_Medicoo\\sources\\logo.png"));
 		headerPanel.add(lblNewLabel);
+		ImageIcon originalIcon = new ImageIcon("sources\\imgPrincipal.jpg");
+		Image scaledImage = originalIcon.getImage().getScaledInstance(350, 250, Image.SCALE_SMOOTH);
+		
+		JLabel lblTitle = new JLabel("iSalud");
+		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		headerPanel.add(lblTitle);
 
 		JPanel mainPanel = new JPanel();
 		mainPanel.setBackground(new Color(144, 238, 144));
-		
-		panelCards.add(mainPanel);
+		contentPane.add(mainPanel, BorderLayout.CENTER);
 		mainPanel.setLayout(new BorderLayout(0, 0));
-		
 		JLabel lblImg = new JLabel("");
-		lblImg.setIcon(new ImageIcon("C:\\Users\\Elias\\workspace1\\Tarea_Medicoo\\sources\\imgPortada.png"));
+		lblImg.setIcon(new ImageIcon("sources\\imgPortada.png"));
 		mainPanel.add(lblImg, BorderLayout.WEST);
-		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(144, 238, 144));
 		mainPanel.add(panel, BorderLayout.CENTER);
@@ -86,17 +100,17 @@ public class MainView extends JFrame {
 		gbc_lblEmail.gridy = 1;
 		panel.add(lblEmail, gbc_lblEmail);
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 3;
-		gbc_textField_1.gridy = 1;
-		panel.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		txtEmail = new JTextField();
+		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		GridBagConstraints gbc_txtEmail = new GridBagConstraints();
+		gbc_txtEmail.insets = new Insets(0, 0, 5, 0);
+		gbc_txtEmail.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtEmail.gridx = 3;
+		gbc_txtEmail.gridy = 1;
+		panel.add(txtEmail, gbc_txtEmail);
+		txtEmail.setColumns(10);
 		
-		JLabel lblContraseña = new JLabel("Contraseña\r\n");
+		JLabel lblContraseña = new JLabel("Contraseña");
 		lblContraseña.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblContraseña = new GridBagConstraints();
 		gbc_lblContraseña.insets = new Insets(0, 0, 5, 5);
@@ -104,15 +118,15 @@ public class MainView extends JFrame {
 		gbc_lblContraseña.gridy = 4;
 		panel.add(lblContraseña, gbc_lblContraseña);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 3;
-		gbc_textField.gridy = 4;
-		panel.add(textField, gbc_textField);
-		textField.setColumns(10);
+		txtPassword = new JPasswordField();
+		txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		GridBagConstraints gbc_txtPassword = new GridBagConstraints();
+		gbc_txtPassword.insets = new Insets(0, 0, 5, 0);
+		gbc_txtPassword.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtPassword.gridx = 3;
+		gbc_txtPassword.gridy = 4;
+		panel.add(txtPassword, gbc_txtPassword);
+		txtPassword.setColumns(10);
 		
 		JLabel lblCreacionCuenta = new JLabel("¿no tienes cuenta?");
 		lblCreacionCuenta.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -124,69 +138,44 @@ public class MainView extends JFrame {
 		panel.add(lblCreacionCuenta, gbc_lblCreacionCuenta);
 		lblCreacionCuenta.setForeground(Color.BLUE);
 		lblCreacionCuenta.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
 		lblCreacionCuenta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CrearCuentas crearCuentas = new CrearCuentas();
-				crearCuentas.setVisible(getFocusTraversalKeysEnabled());
+				CrearCuentas ventanaRegistro = new CrearCuentas(controlador);
+				ventanaRegistro.setVisible(true);
 			}
 		});
 		
-		JButton btnNewButton = new JButton("Iniciar Sesión");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		JButton btnIniciarSesion = new JButton("Iniciar Sesión");
+		btnIniciarSesion.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.gridx = 3;
 		gbc_btnNewButton.gridy = 6;
-		panel.add(btnNewButton, gbc_btnNewButton);
+		panel.add(btnIniciarSesion, gbc_btnNewButton);
 		
-		JPanel welcomePanel = new JPanel();
-		panelCards.add(welcomePanel, "name_182186007900");
-		welcomePanel.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panelBoton = new JPanel();
-		panelBoton.setBackground(new Color(152, 251, 152));
-		welcomePanel.add(panelBoton, BorderLayout.WEST);
-		panelBoton.setLayout(new GridLayout(4, 0, 0, 0));
-		
-		JButton btnAddMed = new JButton("Añadir Medicamento\r\n");
-		btnAddMed.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAddMed.setForeground(new Color(255, 255, 255));
-		btnAddMed.setBackground(new Color(46, 139, 87));
-		panelBoton.add(btnAddMed);
-		
-		JButton btnAddTrat = new JButton("Añadir tratamiento\r\n");
-		btnAddTrat.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAddTrat.setForeground(new Color(255, 255, 255));
-		btnAddTrat.setBackground(new Color(46, 139, 87));
-		panelBoton.add(btnAddTrat);
-		
-		JButton btnMiSalud = new JButton("Mi Salud\r\n");
-		btnMiSalud.setForeground(new Color(255, 255, 255));
-		btnMiSalud.setBackground(new Color(46, 139, 87));
-		panelBoton.add(btnMiSalud);
-		
-		JButton btnCerrar = new JButton("Cerrar Sesion");
-		btnCerrar.setForeground(new Color(255, 255, 255));
-		btnCerrar.setBackground(new Color(46, 139, 87));
-		panelBoton.add(btnCerrar);
-		
-		JPanel panelContent = new JPanel();
-		panelContent.setBackground(new Color(152, 251, 152));
-		welcomePanel.add(panelContent, BorderLayout.CENTER);
-		panelContent.setLayout(new BorderLayout(0, 0));
-		
-		JLabel img = new JLabel("\r\n");
-		img.setHorizontalAlignment(SwingConstants.CENTER);
-		img.setBackground(new Color(152, 251, 152));
-		ImageIcon originalIcon = new ImageIcon("C:\\Users\\Elias\\Desktop\\DAM\\DESARROLLO-INTERFACES\\Tarea_Medicoo\\sources\\imgPrincipal.jpg");
-		Image scaledImage = originalIcon.getImage().getScaledInstance(350, 250, Image.SCALE_SMOOTH);
-		img.setIcon(new ImageIcon(scaledImage));
-		panelContent.add(img, BorderLayout.CENTER);
-		
-		JLabel lblWelcome = new JLabel("BIENVENIDO/A A ISALUD, LA APP PARA GESTIONAR TU BIENESTAR");
-		lblWelcome.setBackground(new Color(152, 251, 152));
-		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panelContent.add(lblWelcome, BorderLayout.NORTH);
+		btnIniciarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String email = txtEmail.getText();
+				String password = new String(txtPassword.getPassword());
+				
+				if (email.isEmpty() || password.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Introduce email y contraseña", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				
+				boolean loginCorrecto = controlador.iniciarSesion(email, password);
+				
+				if (loginCorrecto) {
+					Usuario usuario = controlador.getUsuarioLogueado();
+					JOptionPane.showMessageDialog(null, "¡Bienvenido " + usuario.getNombre() + "!", "Login correcto", JOptionPane.INFORMATION_MESSAGE);
+					
+					txtEmail.setText("");
+					txtPassword.setText("");
+				} else {
+					JOptionPane.showMessageDialog(null, "Email o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 	}
 }

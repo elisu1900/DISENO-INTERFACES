@@ -8,7 +8,9 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
+
+import controller.UsuarioController;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
@@ -31,13 +33,13 @@ public class CrearCuentas extends JDialog {
 	private JTextField txtEmail;
 	private JPasswordField txtPassword;
 	private JPasswordField txtConfirmar;
-	
-	/**
-	 * Launch the application.
-	 */
+
+	// El controlador que maneja los usuarios
+	private UsuarioController controlador;
+
 	public static void main(String[] args) {
 		try {
-			CrearCuentas dialog = new CrearCuentas();
+			CrearCuentas dialog = new CrearCuentas(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -45,10 +47,10 @@ public class CrearCuentas extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
-	 */
-	public CrearCuentas() {
+	// Constructor: recibe el controlador desde MainView
+	public CrearCuentas(UsuarioController controlador) {
+		this.controlador = controlador;
+
 		getContentPane().setBackground(new Color(0, 128, 0));
 		setBounds(100, 100, 500, 459);
 		getContentPane().setLayout(new BorderLayout());
@@ -56,10 +58,10 @@ public class CrearCuentas extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{0, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 0};
-		gbl_contentPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_contentPanel.columnWidths = new int[] { 0, 0 };
+		gbl_contentPanel.rowHeights = new int[] { 0, 0 };
+		gbl_contentPanel.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_contentPanel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 			JPanel panel = new JPanel();
@@ -71,13 +73,13 @@ public class CrearCuentas extends JDialog {
 			gbc_panel.gridy = 0;
 			contentPanel.add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{0, 0, 0};
-			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-			gbl_panel.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
-			gbl_panel.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+			gbl_panel.columnWidths = new int[] { 0, 0, 0 };
+			gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
+			gbl_panel.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
+			gbl_panel.rowWeights = new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE };
 			panel.setLayout(gbl_panel);
 			{
-				JLabel lblNombre = new JLabel("Nombre\r\n");
+				JLabel lblNombre = new JLabel("Nombre");
 				lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
 				GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 				gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
@@ -97,7 +99,7 @@ public class CrearCuentas extends JDialog {
 				txtNombre.setColumns(10);
 			}
 			{
-				JLabel lblApelidos = new JLabel("Apellidos\r\n");
+				JLabel lblApelidos = new JLabel("Apellidos");
 				lblApelidos.setFont(new Font("Tahoma", Font.PLAIN, 16));
 				GridBagConstraints gbc_lblApelidos = new GridBagConstraints();
 				gbc_lblApelidos.insets = new Insets(0, 0, 5, 5);
@@ -117,7 +119,7 @@ public class CrearCuentas extends JDialog {
 				txtApellidos.setColumns(10);
 			}
 			{
-				JLabel lbllEmail = new JLabel("Email\r\n");
+				JLabel lbllEmail = new JLabel("Email");
 				lbllEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
 				GridBagConstraints gbc_lbllEmail = new GridBagConstraints();
 				gbc_lbllEmail.insets = new Insets(0, 0, 5, 5);
@@ -137,7 +139,7 @@ public class CrearCuentas extends JDialog {
 				txtEmail.setColumns(10);
 			}
 			{
-				JLabel lblPassword = new JLabel("Contraseña\r\n");
+				JLabel lblPassword = new JLabel("Contraseña");
 				lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
 				GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 				gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
@@ -157,7 +159,7 @@ public class CrearCuentas extends JDialog {
 				txtPassword.setColumns(10);
 			}
 			{
-				JLabel lblConfirmar = new JLabel("Confirmar comtraseña");
+				JLabel lblConfirmar = new JLabel("Confirmar contraseña");
 				lblConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 				GridBagConstraints gbc_lblConfirmar = new GridBagConstraints();
 				gbc_lblConfirmar.insets = new Insets(0, 0, 0, 5);
@@ -177,7 +179,7 @@ public class CrearCuentas extends JDialog {
 			}
 		}
 		{
-			JLabel lblNewLabel = new JLabel("REGISTRO DE USUARIO\r\n");
+			JLabel lblNewLabel = new JLabel("REGISTRO DE USUARIO");
 			lblNewLabel.setForeground(new Color(255, 255, 255));
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel.setBackground(new Color(0, 100, 0));
@@ -193,41 +195,8 @@ public class CrearCuentas extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (!txtNombre.getText().trim().isEmpty() &&
-							    !txtApellidos.getText().trim().isEmpty() &&
-							    !txtEmail.getText().trim().isEmpty() &&
-							    txtPassword.getPassword().length > 0 &&
-							    txtConfirmar.getPassword().length > 0) {
-							
-							 String pass = new String(txtPassword.getPassword());
-							 String confirm = new String (txtConfirmar.getPassword());
-							 
-							 
-							    if(pass.equals(confirm)) {
-							    	JOptionPane.showMessageDialog(
-							                null, 
-							                "Cuenta creada correctamente ✅", 
-							                "Éxito", 
-							                JOptionPane.INFORMATION_MESSAGE
-							            );
-							    	dispose();
-							    	
-							    }
-							    else {
-							    	JOptionPane.showMessageDialog(
-							                null, 
-							                "La contraseña no coincide", 
-							                "Error", 
-							                JOptionPane.ERROR_MESSAGE
-							            );
-								}
-							} else {
-								JOptionPane.showMessageDialog(
-						                null, 
-						                "Algun campo esta vacio", 
-						                "Error", 
-						                JOptionPane.ERROR_MESSAGE
-						            );							}
+						// Cuando le dan al botón OK, llamamos a este método
+						registrarUsuario();
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -238,7 +207,7 @@ public class CrearCuentas extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						dispose();
+						dispose(); // Cierra la ventana
 					}
 				});
 				cancelButton.setActionCommand("Cancel");
@@ -247,4 +216,33 @@ public class CrearCuentas extends JDialog {
 		}
 	}
 
+	private void registrarUsuario() {
+		String nombre = txtNombre.getText().trim();
+		String apellidos = txtApellidos.getText().trim();
+		String email = txtEmail.getText().trim();
+		String pass = new String(txtPassword.getPassword());
+		String confirmar = new String(txtConfirmar.getPassword());
+
+		if (nombre.isEmpty() || apellidos.isEmpty() || email.isEmpty() || pass.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		if (!pass.equals(confirmar)) {
+			JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		boolean registrado = controlador.registrarUsuario(nombre, apellidos, email, pass);
+
+		if (registrado) {
+			JOptionPane.showMessageDialog(this, "Cuenta creada correctamente", "Éxito",
+					JOptionPane.INFORMATION_MESSAGE);
+			dispose();
+		} else {
+			JOptionPane.showMessageDialog(this, "Ya existe un usuario con ese email", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }
