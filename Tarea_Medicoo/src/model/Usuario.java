@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
@@ -9,6 +10,7 @@ public class Usuario {
 	private String email;
 	private String pass;
 	private List<Tratamiento> misTratamientos;
+	private List<Medicamento> medicamentos; 
 
 	public Usuario(String nombre, String apellidos, String email, String pass, List<Tratamiento> misTratamientos) {
 		super();
@@ -17,6 +19,7 @@ public class Usuario {
 		this.email = email;
 		this.pass = pass;
 		this.misTratamientos = misTratamientos;
+		this.medicamentos = new ArrayList<>(); 
 	}
 
 	public String getNombre() {
@@ -59,4 +62,11 @@ public class Usuario {
 		this.misTratamientos = misTratamientos;
 	}
 
+	public List<Medicamento> getMedicamentos() {
+		return medicamentos;
+	}
+
+	public void setMedicamentos(List<Medicamento> medicamentos) {
+		this.medicamentos = medicamentos;
+	}
 }

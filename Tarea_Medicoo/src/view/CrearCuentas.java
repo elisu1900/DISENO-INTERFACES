@@ -34,7 +34,6 @@ public class CrearCuentas extends JDialog {
 	private JPasswordField txtPassword;
 	private JPasswordField txtConfirmar;
 
-	// El controlador que maneja los usuarios
 	private UsuarioController controlador;
 
 	public static void main(String[] args) {
@@ -47,7 +46,6 @@ public class CrearCuentas extends JDialog {
 		}
 	}
 
-	// Constructor: recibe el controlador desde MainView
 	public CrearCuentas(UsuarioController controlador) {
 		this.controlador = controlador;
 
@@ -78,144 +76,133 @@ public class CrearCuentas extends JDialog {
 			gbl_panel.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
 			gbl_panel.rowWeights = new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE };
 			panel.setLayout(gbl_panel);
-			{
-				JLabel lblNombre = new JLabel("Nombre");
-				lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				GridBagConstraints gbc_lblNombre = new GridBagConstraints();
-				gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNombre.gridx = 0;
-				gbc_lblNombre.gridy = 0;
-				panel.add(lblNombre, gbc_lblNombre);
-			}
-			{
-				txtNombre = new JTextField();
-				txtNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				GridBagConstraints gbc_txtNombre = new GridBagConstraints();
-				gbc_txtNombre.insets = new Insets(0, 0, 5, 0);
-				gbc_txtNombre.fill = GridBagConstraints.HORIZONTAL;
-				gbc_txtNombre.gridx = 1;
-				gbc_txtNombre.gridy = 0;
-				panel.add(txtNombre, gbc_txtNombre);
-				txtNombre.setColumns(10);
-			}
-			{
-				JLabel lblApelidos = new JLabel("Apellidos");
-				lblApelidos.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				GridBagConstraints gbc_lblApelidos = new GridBagConstraints();
-				gbc_lblApelidos.insets = new Insets(0, 0, 5, 5);
-				gbc_lblApelidos.gridx = 0;
-				gbc_lblApelidos.gridy = 1;
-				panel.add(lblApelidos, gbc_lblApelidos);
-			}
-			{
-				txtApellidos = new JTextField();
-				txtApellidos.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				GridBagConstraints gbc_txtApellidos = new GridBagConstraints();
-				gbc_txtApellidos.insets = new Insets(0, 0, 5, 0);
-				gbc_txtApellidos.fill = GridBagConstraints.HORIZONTAL;
-				gbc_txtApellidos.gridx = 1;
-				gbc_txtApellidos.gridy = 1;
-				panel.add(txtApellidos, gbc_txtApellidos);
-				txtApellidos.setColumns(10);
-			}
-			{
-				JLabel lbllEmail = new JLabel("Email");
-				lbllEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				GridBagConstraints gbc_lbllEmail = new GridBagConstraints();
-				gbc_lbllEmail.insets = new Insets(0, 0, 5, 5);
-				gbc_lbllEmail.gridx = 0;
-				gbc_lbllEmail.gridy = 2;
-				panel.add(lbllEmail, gbc_lbllEmail);
-			}
-			{
-				txtEmail = new JTextField();
-				txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				GridBagConstraints gbc_txtEmail = new GridBagConstraints();
-				gbc_txtEmail.insets = new Insets(0, 0, 5, 0);
-				gbc_txtEmail.fill = GridBagConstraints.HORIZONTAL;
-				gbc_txtEmail.gridx = 1;
-				gbc_txtEmail.gridy = 2;
-				panel.add(txtEmail, gbc_txtEmail);
-				txtEmail.setColumns(10);
-			}
-			{
-				JLabel lblPassword = new JLabel("Contraseña");
-				lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				GridBagConstraints gbc_lblPassword = new GridBagConstraints();
-				gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
-				gbc_lblPassword.gridx = 0;
-				gbc_lblPassword.gridy = 3;
-				panel.add(lblPassword, gbc_lblPassword);
-			}
-			{
-				txtPassword = new JPasswordField();
-				txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				GridBagConstraints gbc_txtPassword = new GridBagConstraints();
-				gbc_txtPassword.insets = new Insets(0, 0, 5, 0);
-				gbc_txtPassword.fill = GridBagConstraints.HORIZONTAL;
-				gbc_txtPassword.gridx = 1;
-				gbc_txtPassword.gridy = 3;
-				panel.add(txtPassword, gbc_txtPassword);
-				txtPassword.setColumns(10);
-			}
-			{
-				JLabel lblConfirmar = new JLabel("Confirmar contraseña");
-				lblConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				GridBagConstraints gbc_lblConfirmar = new GridBagConstraints();
-				gbc_lblConfirmar.insets = new Insets(0, 0, 0, 5);
-				gbc_lblConfirmar.gridx = 0;
-				gbc_lblConfirmar.gridy = 4;
-				panel.add(lblConfirmar, gbc_lblConfirmar);
-			}
-			{
-				txtConfirmar = new JPasswordField();
-				txtConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				GridBagConstraints gbc_txtConfirmar = new GridBagConstraints();
-				gbc_txtConfirmar.fill = GridBagConstraints.HORIZONTAL;
-				gbc_txtConfirmar.gridx = 1;
-				gbc_txtConfirmar.gridy = 4;
-				panel.add(txtConfirmar, gbc_txtConfirmar);
-				txtConfirmar.setColumns(10);
-			}
-		}
-		{
+
+			JLabel lblNombre = new JLabel("Nombre");
+			lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			GridBagConstraints gbc_lblNombre = new GridBagConstraints();
+			gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNombre.gridx = 0;
+			gbc_lblNombre.gridy = 0;
+			panel.add(lblNombre, gbc_lblNombre);
+
+			txtNombre = new JTextField();
+			txtNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			GridBagConstraints gbc_txtNombre = new GridBagConstraints();
+			gbc_txtNombre.insets = new Insets(0, 0, 5, 0);
+			gbc_txtNombre.fill = GridBagConstraints.HORIZONTAL;
+			gbc_txtNombre.gridx = 1;
+			gbc_txtNombre.gridy = 0;
+			panel.add(txtNombre, gbc_txtNombre);
+			txtNombre.setColumns(10);
+
+			JLabel lblApelidos = new JLabel("Apellidos");
+			lblApelidos.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			GridBagConstraints gbc_lblApelidos = new GridBagConstraints();
+			gbc_lblApelidos.insets = new Insets(0, 0, 5, 5);
+			gbc_lblApelidos.gridx = 0;
+			gbc_lblApelidos.gridy = 1;
+			panel.add(lblApelidos, gbc_lblApelidos);
+
+			txtApellidos = new JTextField();
+			txtApellidos.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			GridBagConstraints gbc_txtApellidos = new GridBagConstraints();
+			gbc_txtApellidos.insets = new Insets(0, 0, 5, 0);
+			gbc_txtApellidos.fill = GridBagConstraints.HORIZONTAL;
+			gbc_txtApellidos.gridx = 1;
+			gbc_txtApellidos.gridy = 1;
+			panel.add(txtApellidos, gbc_txtApellidos);
+			txtApellidos.setColumns(10);
+
+			JLabel lbllEmail = new JLabel("Email");
+			lbllEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			GridBagConstraints gbc_lbllEmail = new GridBagConstraints();
+			gbc_lbllEmail.insets = new Insets(0, 0, 5, 5);
+			gbc_lbllEmail.gridx = 0;
+			gbc_lbllEmail.gridy = 2;
+			panel.add(lbllEmail, gbc_lbllEmail);
+
+			txtEmail = new JTextField();
+			txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			GridBagConstraints gbc_txtEmail = new GridBagConstraints();
+			gbc_txtEmail.insets = new Insets(0, 0, 5, 0);
+			gbc_txtEmail.fill = GridBagConstraints.HORIZONTAL;
+			gbc_txtEmail.gridx = 1;
+			gbc_txtEmail.gridy = 2;
+			panel.add(txtEmail, gbc_txtEmail);
+			txtEmail.setColumns(10);
+
+			JLabel lblPassword = new JLabel("Contraseña");
+			lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			GridBagConstraints gbc_lblPassword = new GridBagConstraints();
+			gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
+			gbc_lblPassword.gridx = 0;
+			gbc_lblPassword.gridy = 3;
+			panel.add(lblPassword, gbc_lblPassword);
+
+			txtPassword = new JPasswordField();
+			txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			GridBagConstraints gbc_txtPassword = new GridBagConstraints();
+			gbc_txtPassword.insets = new Insets(0, 0, 5, 0);
+			gbc_txtPassword.fill = GridBagConstraints.HORIZONTAL;
+			gbc_txtPassword.gridx = 1;
+			gbc_txtPassword.gridy = 3;
+			panel.add(txtPassword, gbc_txtPassword);
+			txtPassword.setColumns(10);
+
+			JLabel lblConfirmar = new JLabel("Confirmar contraseña");
+			lblConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			GridBagConstraints gbc_lblConfirmar = new GridBagConstraints();
+			gbc_lblConfirmar.insets = new Insets(0, 0, 0, 5);
+			gbc_lblConfirmar.gridx = 0;
+			gbc_lblConfirmar.gridy = 4;
+			panel.add(lblConfirmar, gbc_lblConfirmar);
+
+			txtConfirmar = new JPasswordField();
+			txtConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			GridBagConstraints gbc_txtConfirmar = new GridBagConstraints();
+			gbc_txtConfirmar.fill = GridBagConstraints.HORIZONTAL;
+			gbc_txtConfirmar.gridx = 1;
+			gbc_txtConfirmar.gridy = 4;
+			panel.add(txtConfirmar, gbc_txtConfirmar);
+			txtConfirmar.setColumns(10);
+
 			JLabel lblNewLabel = new JLabel("REGISTRO DE USUARIO");
 			lblNewLabel.setForeground(new Color(255, 255, 255));
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel.setBackground(new Color(0, 100, 0));
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
 			getContentPane().add(lblNewLabel, BorderLayout.NORTH);
-		}
-		{
+
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(new Color(0, 100, 0));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						// Cuando le dan al botón OK, llamamos a este método
-						registrarUsuario();
-					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						dispose(); // Cierra la ventana
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
+
+			JButton okButton = new JButton("OK");
+			okButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+
+					registrarUsuario();
+				}
+			});
+			okButton.setActionCommand("OK");
+			buttonPane.add(okButton);
+			getRootPane().setDefaultButton(okButton);
+
+			JButton cancelButton = new JButton("Cancel");
+			cancelButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			cancelButton.setActionCommand("Cancel");
+			buttonPane.add(cancelButton);
 		}
 	}
 
+	/**
+	 * metodo que registra a un usuario
+	 */
 	private void registrarUsuario() {
 		String nombre = txtNombre.getText().trim();
 		String apellidos = txtApellidos.getText().trim();
@@ -230,18 +217,18 @@ public class CrearCuentas extends JDialog {
 		}
 
 		if (!pass.equals(confirmar)) {
-			JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
 		boolean registrado = controlador.registrarUsuario(nombre, apellidos, email, pass);
 
 		if (registrado) {
-			JOptionPane.showMessageDialog(this, "Cuenta creada correctamente", "Éxito",
+			JOptionPane.showMessageDialog(null, "Cuenta creada correctamente", "Éxito",
 					JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 		} else {
-			JOptionPane.showMessageDialog(this, "Ya existe un usuario con ese email", "Error",
+			JOptionPane.showMessageDialog(null, "Ya existe un usuario con ese email", "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}

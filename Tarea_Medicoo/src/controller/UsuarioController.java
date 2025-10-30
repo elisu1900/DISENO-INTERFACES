@@ -1,7 +1,6 @@
 package controller;
 
 import model.Usuario;
-
 import view.MainView;
 import view.panelUser;
 
@@ -13,21 +12,34 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+/*
+ * case que controla usuarios
+ */
 public class UsuarioController {
 
 	private List<Usuario> usuarios;
+	private Usuario usuarioActual;
 
-	private Usuario usuarioLogueado;
-
+	/**
+	 * constructor del controller de usuario
+	 */
 	public UsuarioController() {
-		usuarios = new ArrayList<>();
 
-		Usuario usuarioPrueba = new Usuario("Usuario", "Prueba", "usuario", "usuario", new ArrayList<>());
+		usuarios = new ArrayList<>();
+		Usuario usuarioPrueba = new Usuario("Usuario", "Usuario", "usuario", "usuario", new ArrayList<>());
 		usuarios.add(usuarioPrueba);
 	}
 
+	/**
+	 * registro de un nuevo usuario
+	 * 
+	 * @param nombre
+	 * @param apellidos
+	 * @param email
+	 * @param pass
+	 * @return
+	 */
 	public boolean registrarUsuario(String nombre, String apellidos, String email, String pass) {
-
 		for (Usuario usuario : usuarios) {
 			if (usuario.getEmail().equals(email)) {
 				return false;
@@ -38,60 +50,67 @@ public class UsuarioController {
 		return true;
 	}
 
+	/**
+	 * metodo que comprueba que el email es valido y si la contraseña es correcta
+	 * 
+	 * @param email
+	 * @param pass
+	 * @return
+	 */
 	public boolean iniciarSesion(String email, String pass) {
-
 		for (Usuario usuario : usuarios) {
 			if (usuario.getEmail().equals(email) && usuario.getPass().equals(pass)) {
-				usuarioLogueado = usuario;
+				usuarioActual = usuario;
 				return true;
 			}
 		}
-
 		return false;
 	}
 
+	/**
+	 * @return usuarioActual
+	 */
 	public Usuario getUsuarioLogueado() {
-		return usuarioLogueado;
+		return usuarioActual;
 	}
 
+	/**
+	 * cierra la sesion actual
+	 */
 	public void cerrarSesion() {
-		usuarioLogueado = null;
+		usuarioActual = null;
 	}
 
+	/**
+	 * añade eventos a los botones
+	 */
 	public void addListeners() {
 		MainView.btnIniciarSesion.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				String email = MainView.txtEmail.getText();
 				String password = new String(MainView.txtPassword.getPassword());
 
 				if (email.isEmpty() || password.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Introduce email y contraseña", "Error",
+					JOptionPane.showMessageDialog(null, "completa todos los campos.", "Error",
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
-				boolean loginCorrecto = iniciarSesion(email, password);
+				boolean loginExitoso = iniciarSesion(email, password);
 
-				if (loginCorrecto) {
-					Usuario usuario = getUsuarioLogueado();
-					JOptionPane.showMessageDialog(null, "¡Bienvenido " + usuario.getNombre() + "!", "Login correcto",
-							JOptionPane.INFORMATION_MESSAGE);
+				if (loginExitoso) {
 
-					MainView.txtEmail.setText("");
-					MainView.txtPassword.setText("");
-
-					MainView.contentPane.remove(MainView.mainPanel);
-					panelUser welcomePanel = new panelUser();
-					MainView.contentPane.add(welcomePanel, BorderLayout.CENTER);
-					MainView.contentPane.revalidate();
-					MainView.contentPane.repaint();
+					panelUser panel = new panelUser(usuarioActual);
+					MainView.mainPanel.removeAll();
+					MainView.mainPanel.setLayout(new BorderLayout());
+					MainView.mainPanel.add(panel, BorderLayout.CENTER);
+					MainView.mainPanel.revalidate();
+					MainView.mainPanel.repaint();
 				} else {
-					JOptionPane.showMessageDialog(null, "Email o contraseña incorrectos", "Error",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
-
 	}
-
 }
