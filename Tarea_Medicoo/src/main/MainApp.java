@@ -1,6 +1,7 @@
 package main;
 
 
+import controller.UsuarioController;
 import view.MainView;
 
 public class MainApp {
@@ -9,6 +10,7 @@ public class MainApp {
 
 		MainView ventana = new MainView();
 		ventana.setVisible(true);
+		
 	}
 
 }

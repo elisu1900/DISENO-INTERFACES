@@ -11,6 +11,8 @@ import controller.UsuarioController;
 import model.Usuario;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
@@ -32,25 +34,13 @@ import javax.swing.JButton;
 public class MainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JPasswordField txtPassword;
-	private JTextField txtEmail;
-	
-	// El controlador que maneja los usuarios
+	public static JPanel contentPane;
+	public static JPasswordField txtPassword;
+	public static JTextField txtEmail;
+	public static JButton btnIniciarSesion;
 	private UsuarioController controlador;
+	public static JPanel mainPanel;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainView frame = new MainView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public MainView() {
 		controlador = new UsuarioController();
@@ -67,18 +57,19 @@ public class MainView extends JFrame {
 		headerPanel.setBackground(new Color(60, 179, 113));
 		contentPane.add(headerPanel, BorderLayout.NORTH);
 
-		JLabel lblNewLabel = new JLabel("iSalud\r\n");
+		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Elias\\workspace1\\Tarea_Medicoo\\sources\\logo.png"));
+		ImageIcon originalIcon = new ImageIcon("sources\\logo.png");
+		
 		headerPanel.add(lblNewLabel);
-		ImageIcon originalIcon = new ImageIcon("sources\\imgPrincipal.jpg");
-		Image scaledImage = originalIcon.getImage().getScaledInstance(350, 250, Image.SCALE_SMOOTH);
+		lblNewLabel.setIcon(originalIcon);
+		
 		
 		JLabel lblTitle = new JLabel("iSalud");
 		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		headerPanel.add(lblTitle);
 
-		JPanel mainPanel = new JPanel();
+		mainPanel = new JPanel();
 		mainPanel.setBackground(new Color(144, 238, 144));
 		contentPane.add(mainPanel, BorderLayout.CENTER);
 		mainPanel.setLayout(new BorderLayout(0, 0));
@@ -147,35 +138,13 @@ public class MainView extends JFrame {
 			}
 		});
 		
-		JButton btnIniciarSesion = new JButton("Iniciar Sesión");
+		btnIniciarSesion = new JButton("Iniciar Sesion");
 		btnIniciarSesion.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.gridx = 3;
 		gbc_btnNewButton.gridy = 6;
 		panel.add(btnIniciarSesion, gbc_btnNewButton);
 		
-		btnIniciarSesion.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String email = txtEmail.getText();
-				String password = new String(txtPassword.getPassword());
-				
-				if (email.isEmpty() || password.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Introduce email y contraseña", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-				
-				boolean loginCorrecto = controlador.iniciarSesion(email, password);
-				
-				if (loginCorrecto) {
-					Usuario usuario = controlador.getUsuarioLogueado();
-					JOptionPane.showMessageDialog(null, "¡Bienvenido " + usuario.getNombre() + "!", "Login correcto", JOptionPane.INFORMATION_MESSAGE);
-					
-					txtEmail.setText("");
-					txtPassword.setText("");
-				} else {
-					JOptionPane.showMessageDialog(null, "Email o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-			}
-		});
+		controlador.addListeners();
 	}
 }
